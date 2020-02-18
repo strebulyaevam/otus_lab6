@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Auto-tests-otus" parallel="classes" thread-count="4">
+
+<!--
+    <listeners>
+        <listener class-name="TestNGListn.Sberb2bListener"/>
+    </listeners>
+-->
+
+
+    <test name="homePage-tests">
+
+        <parameter name="hostname" value="https://otus.ru/" />
+        <parameter name="login"  value="mstrebulyaeva@gmail.com" />
+        <parameter name="pwd"  value="otusstreb82" />
+
+
+        <classes>
+            <class name="testotus.Lab6Tests"/>
+        </classes>
+    </test>
+</suite>
