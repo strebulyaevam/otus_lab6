@@ -43,7 +43,7 @@ public class TestHelper {
     public static void sendKeysForElem (WebDriver driver, WebDriverWait waiter, By loc_elem, String text, String nameOfElem) throws Exception
     {
         try {
-            Log.info("Try to input text in" + nameOfElem);
+            Log.info("Try to input text in " + nameOfElem);
             waiter.until(ExpectedConditions.presenceOfElementLocated(loc_elem)).clear();
             driver.findElement(loc_elem).sendKeys(text);
 

@@ -12,10 +12,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.Parameters;
-import org.testng.reporters.jq.Main;
-import pageobjects.MainPage;
-
-import java.util.List;
+import pageobjects.HomePage;
+import pageobjects.MyAccountPage;
+import pageobjects.PersonalPage;
 
 
 public class Lab6Tests {
@@ -39,19 +38,24 @@ public class Lab6Tests {
 
     @Parameters({"hostname", "login", "pwd"})
     @Test
-    public void getAllAudioBooks(String hostname, String login, String pwd) throws Exception {
+    public void checkDataSaving(String hostname, String login, String pwd) throws Exception {
+        HomePage homePage = null;
+        PersonalPage personalPage = null;
 
         TestHelper.getCleanURL(driver, hostname);
         driver.manage().window().maximize();
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickOnSignInButton().login(login, pwd);
-    }
+        HomePage mainPage = new HomePage(driver);
+        homePage = mainPage.clickOnSignInButton().login(login, pwd);
+        Assert.assertNotNull(homePage, "Login is failed");
+        personalPage = homePage.getMyAccountPage().clickOnPersonalInfo();
+        Assert.assertNotNull(personalPage, "Get Personal info is failed");
+   }
 
     @Parameters({"browser"})
     @AfterClass
     public void quitBrowser (String browser) {
         if(driver!=null){
-            Log.info("Quit from " + browser);
+//            Log.info("Quit from " + browser);
 //            driver.quit();
         }
     }
