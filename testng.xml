@@ -10,9 +10,11 @@
 
     <test name="homePage-tests">
 
+<!--
         <parameter name="hostname" value="https://otus.ru/" />
-        <parameter name="login"  value="mstrebulyaeva@gmail.com" />
+        <parameter name="login"  value="kmarys@mail.ru" />
         <parameter name="pwd"  value="otusstreb82" />
+-->
 
 
         <classes>

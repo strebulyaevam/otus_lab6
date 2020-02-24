@@ -17,7 +17,7 @@ public class SignInPage {
     public SignInPage(WebDriver driver) {
         this.driver = driver;
         waiter = new WebDriverWait(driver, 4);
-        waiter.until(ExpectedConditions.elementToBeClickable(loc_err_msg));
+        TestHelper.isPageLoad(waiter, loc_err_msg, "Login");
     }
 
     By loc_signinbtn = By.cssSelector("div[data-tab-id='login']");

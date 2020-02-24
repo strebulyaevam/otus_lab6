@@ -59,4 +59,16 @@ public class TestHelper {
         driver.manage().deleteAllCookies();
         driver.get(url);
     }
+
+    public static void isPageLoad (WebDriverWait waiter, By loc_elem, String pageName)
+    {
+        try{
+            waiter.until(ExpectedConditions.elementToBeClickable(loc_elem));
+        }catch (Exception e){
+            Log.error("Page - " + pageName +" is not loaded");
+            Assert.fail("Page is not loaded");
+        }
+    }
+
+
 }

@@ -17,8 +17,7 @@ public class MyAccountPage {
     public MyAccountPage(WebDriver driver) {
         this.driver = driver;
         waiter = new WebDriverWait(driver, 4);
-        waiter.until(ExpectedConditions.elementToBeClickable(loc_personalinfo));
-
+        TestHelper.isPageLoad(waiter, loc_personalinfo, "otus.ru/learning/");
     }
 
     By loc_personalinfo = By.cssSelector("div.nav.nav_mobile-fix.no-print.js-overflow-scroll a[href='/lk/biography/personal/']");

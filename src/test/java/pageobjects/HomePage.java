@@ -18,7 +18,7 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
         waiter = new WebDriverWait(driver, 4);
-        waiter.until(ExpectedConditions.elementToBeClickable(loc_course_item));
+        TestHelper.isPageLoad(waiter, loc_course_item, "Otus home");
     }
 
     By loc_login_registr = By.cssSelector("button[data-modal-id='new-log-reg']");
