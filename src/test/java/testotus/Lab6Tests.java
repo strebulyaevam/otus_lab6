@@ -97,7 +97,7 @@ public class Lab6Tests {
         Assert.assertEquals(personalPage.getLname_lat(), cfg.lname_lat(), "Last Name lat is not equal");
         Log.info("Last Name lat is OK");
         Assert.assertEquals(personalPage.getCountry(), cfg.country(), "Country is not equal");
-        Log.info("First Country is OK");
+        Log.info("Country is OK");
         Assert.assertEquals(personalPage.get1stConnectType(), "Facebook", "Facebook is not equal");
         Assert.assertEquals(personalPage.getFacebookAcc(), cfg.facebook(), "Facebook account is not equal");
         Log.info("Facebook is OK");
