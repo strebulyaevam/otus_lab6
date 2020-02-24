@@ -76,14 +76,35 @@ public class Lab6Tests {
         Assert.assertNotNull(homePage, "Login is failed");
         personalPage = homePage.getMyAccountPage().clickOnPersonalInfo();
         Assert.assertNotNull(personalPage, "Get Personal info is failed");
+        personalPage.deleteAllContacts();
         personalPage.setUpFname(cfg.fname());
         personalPage.setFname_lat(cfg.fname_lat());
         personalPage.setUpLname(cfg.lname());
         personalPage.setLname_lat(cfg.lname_lat());
         personalPage.setCountryRussia();
         personalPage.setCitySbp();
-        personalPage.setPhone(cfg.phone());
-   }
+        personalPage.addFacebookContact(cfg.facebook());
+        personalPage.addTelegramContact(cfg.telegram());
+        personalPage.clickOnSaveAndContinue();
+        TestHelper.getCleanURL(driver, hostname);
+        personalPage = mainPage.clickOnSignInButton().login(login, pwd).getMyAccountPage().clickOnPersonalInfo();
+        Assert.assertEquals(personalPage.getFname(), cfg.fname(), "First Name is not equal");
+        Log.info("First Name is OK");
+        Assert.assertEquals(personalPage.getFname_lat(), cfg.fname_lat(), "First Name lat is not equal");
+        Log.info("First Name lat is OK");
+        Assert.assertEquals(personalPage.getLname(), cfg.lname(), "Last Name is not equal");
+        Log.info("Last Name is OK");
+        Assert.assertEquals(personalPage.getLname_lat(), cfg.lname_lat(), "Last Name lat is not equal");
+        Log.info("Last Name lat is OK");
+        Assert.assertEquals(personalPage.getCountry(), cfg.country(), "Country is not equal");
+        Log.info("First Country is OK");
+        Assert.assertEquals(personalPage.get1stConnectType(), "Facebook", "Facebook is not equal");
+        Assert.assertEquals(personalPage.getFacebookAcc(), cfg.facebook(), "Facebook account is not equal");
+        Log.info("Facebook is OK");
+        Assert.assertEquals(personalPage.get2ndConnectType(), "Тelegram", "Тelegram is not equal");
+        Assert.assertEquals(personalPage.getTelegramAcc(), cfg.telegram(), "Тelegram account is not equal");
+        Log.info("Тelegram is OK");
+    }
 
 //    @Parameters({"browser"})
     @AfterClass
