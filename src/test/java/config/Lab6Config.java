@@ -3,6 +3,7 @@ package config;
 import org.aeonbits.owner.Config;
 
 public interface Lab6Config extends Config {
+    String browser();
     String hostname();
     String login();
     String pwd();
