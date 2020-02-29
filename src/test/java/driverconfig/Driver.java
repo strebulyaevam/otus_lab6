@@ -9,10 +9,4 @@ public interface Driver {
 
     WebDriver getDriver();
 
-    default void closeDriver(WebDriver driver){
-        if(driver!=null){
-            Log.info("Quit from browser");
-            driver.quit();
-        }
-    };
 }

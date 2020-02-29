@@ -15,7 +15,6 @@ public class ChromeDrv implements Driver {
         try{
             WebDriverManager.chromedriver().setup();
             driver = new org.openqa.selenium.chrome.ChromeDriver();
-            driver.manage().window().maximize();
             return driver;
         } catch (Exception e){
             Log.fatal("New driver for Chrome browser isn't created");

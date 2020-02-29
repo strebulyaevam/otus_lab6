@@ -1,5 +1,6 @@
 package pageobjects;
 
+import driverconfig.DriverServies;
 import helpers.TestHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,9 +15,11 @@ public class HomePage {
 
     WebDriver driver;
     WebDriverWait waiter;
+    DriverServies driverServies;
 
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
+    public HomePage(DriverServies driverServies) {
+        this.driverServies = driverServies;
+        this.driver = driverServies.getDriver();
         waiter = new WebDriverWait(driver, 4);
         TestHelper.isPageLoad(waiter, loc_course_item, "Otus home");
     }
@@ -29,7 +32,7 @@ public class HomePage {
     {
         try {
             TestHelper.clickOnElem(waiter, loc_login_registr, "SignIn and Registr btn");
-            return new SignInPage(driver);
+            return new SignInPage(driverServies);
         } catch (Exception e) {
             Log.error(e.getMessage(), e);
             return null;
@@ -41,9 +44,13 @@ public class HomePage {
         try {
             waiter.until(ExpectedConditions.visibilityOfElementLocated(loc_user_name)).click();
             TestHelper.getURL(driver, "https://otus.ru/learning/");
-            return new MyAccountPage(driver);
+            return new MyAccountPage(driverServies);
         } catch (Exception e){
             return null;
         }
+    }
+
+    public void getCleanPage (String hostname){
+        TestHelper.getCleanURL(driver, hostname);
     }
 }

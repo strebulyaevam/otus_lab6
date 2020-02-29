@@ -2,6 +2,7 @@ package testotus;
 
 import config.Lab6Config;
 import driverconfig.ChromeDrv;
+import driverconfig.DriverServies;
 import driverconfig.FFDrv;
 import driverconfig.SelectDriver;
 import helpers.TestHelper;
@@ -22,20 +23,13 @@ public class Lab6Tests {
 
     private static Logger Log = LogManager.getLogger(Lab6Tests.class);
 
-    WebDriver driver;
     Lab6Config cfg;
-    SelectDriver selectDriver = new SelectDriver();
+    DriverServies driverServies;
 
     @BeforeClass
     public void init(){
         cfg = ConfigFactory.create(Lab6Config.class);
-        if(cfg.browser().equals("Chrome")) {
-            selectDriver.setUpDriver(new ChromeDrv());
-        }
-        if(cfg.browser().equals("FireFox")) {
-            selectDriver.setUpDriver(new FFDrv());
-        }
-        driver = selectDriver.newDriver();
+        driverServies = new DriverServies();
     }
 
 
@@ -50,8 +44,8 @@ public class Lab6Tests {
         HomePage homePage = null;
         PersonalPage personalPage = null;
 
-        TestHelper.getCleanURL(driver, hostname);
-        HomePage mainPage = new HomePage(driver);
+        TestHelper.getCleanURL(driverServies.getDriver(), hostname);
+        HomePage mainPage = new HomePage(driverServies);
         homePage = mainPage.clickOnSignInButton().login(login, pwd);
         Assert.assertNotNull(homePage, "Login is failed");
         personalPage = homePage.getMyAccountPage().clickOnPersonalInfo();
@@ -66,7 +60,7 @@ public class Lab6Tests {
         personalPage.addFacebookContact(cfg.facebook());
         personalPage.addTelegramContact(cfg.telegram());
         personalPage.clickOnSaveAndContinue();
-        TestHelper.getCleanURL(driver, hostname);
+        mainPage.getCleanPage(hostname);
         personalPage = mainPage.clickOnSignInButton().login(login, pwd).getMyAccountPage().clickOnPersonalInfo();
         Assert.assertEquals(personalPage.getFname(), cfg.fname(), "First Name is not equal");
         Log.info("First Name is OK");
@@ -89,6 +83,6 @@ public class Lab6Tests {
 //    @Parameters({"browser"})
     @AfterClass
     public void quitBrowser () {
-        selectDriver.closeDriver(driver);
+        driverServies.closeDriver();
     }
 }

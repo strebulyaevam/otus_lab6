@@ -1,5 +1,6 @@
 package pageobjects;
 
+import driverconfig.DriverServies;
 import helpers.TestHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,8 +18,8 @@ public class PersonalPage {
     WebDriver driver;
     WebDriverWait waiter;
 
-    public PersonalPage(WebDriver driver) {
-        this.driver = driver;
+    public PersonalPage(DriverServies driverServies) {
+        this.driver = driverServies.getDriver();
         waiter = new WebDriverWait(driver, 4);
         TestHelper.isPageLoad(waiter, loc_fname, "/lk/biography/personal/");
     }

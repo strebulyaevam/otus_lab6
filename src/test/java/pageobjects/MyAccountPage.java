@@ -1,5 +1,6 @@
 package pageobjects;
 
+import driverconfig.DriverServies;
 import helpers.TestHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,9 +14,11 @@ public class MyAccountPage {
 
     WebDriver driver;
     WebDriverWait waiter;
+    DriverServies driverServies;
 
-    public MyAccountPage(WebDriver driver) {
-        this.driver = driver;
+    public MyAccountPage(DriverServies driverServies) {
+        this.driverServies = driverServies;
+        this.driver = driverServies.getDriver();
         waiter = new WebDriverWait(driver, 4);
         TestHelper.isPageLoad(waiter, loc_personalinfo, "otus.ru/learning/");
     }
@@ -26,7 +29,7 @@ public class MyAccountPage {
     {
         try {
             TestHelper.clickOnElem(waiter, loc_personalinfo, "About Me link");
-            return new PersonalPage(driver);
+            return new PersonalPage(driverServies);
         } catch (Exception e){
             return null;
         }

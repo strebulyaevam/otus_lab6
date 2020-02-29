@@ -14,7 +14,6 @@ public class FFDrv implements Driver{
         try{
             WebDriverManager.firefoxdriver().setup();
             driver = new org.openqa.selenium.firefox.FirefoxDriver();
-            driver.manage().window().maximize();
             return driver;
         } catch (Exception e){
             Log.fatal("New driver for FireFox browser isn't created");

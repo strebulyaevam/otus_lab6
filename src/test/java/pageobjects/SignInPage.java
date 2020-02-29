@@ -1,5 +1,6 @@
 package pageobjects;
 
+import driverconfig.DriverServies;
 import helpers.TestHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,9 +14,11 @@ public class SignInPage {
 
     WebDriver driver;
     WebDriverWait waiter;
+    DriverServies driverServies;
 
-    public SignInPage(WebDriver driver) {
-        this.driver = driver;
+    public SignInPage(DriverServies driverServies) {
+        this.driverServies = driverServies;
+        this.driver = driverServies.getDriver();
         waiter = new WebDriverWait(driver, 4);
         TestHelper.isPageLoad(waiter, loc_err_msg, "Login");
     }
@@ -34,7 +37,7 @@ public class SignInPage {
             TestHelper.sendKeysForElem(driver, waiter, loc_pwd, pwd, "Input password");
             TestHelper.clickOnElem(waiter, loc_submit, "Enter btn");
             waiter.until(ExpectedConditions.invisibilityOfElementLocated(loc_err_msg));
-            return new HomePage(driver);
+            return new HomePage(driverServies);
             } catch (Exception e) {
                 Log.error(e.getMessage(), e);
                 return null;
