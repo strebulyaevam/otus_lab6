@@ -1,15 +1,11 @@
 package testotus;
 
 import config.Lab6Config;
-import driverconfig.ChromeDrv;
 import driverconfig.DriverServies;
-import driverconfig.FFDrv;
-import driverconfig.SelectDriver;
 import helpers.TestHelper;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
